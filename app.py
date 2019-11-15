@@ -74,7 +74,8 @@ def view_jobs():
 
 	for job in session.query(Job):
 		print(job)
-		temp_list = [job.job_name, job.company_name, job.website_link]
+		job_button = "<a href=\""+job.website_link+"\" class=\"btn btn-success\">View</a>"
+		temp_list = [job.job_name, job.company_name, job_button]
 		all_jobs.append(temp_list)
 
 	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs))
