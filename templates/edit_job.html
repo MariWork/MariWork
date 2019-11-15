@@ -2,14 +2,14 @@
 <html>
 
 	<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+		
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
 
@@ -39,18 +39,22 @@
 			    </ul>
 			  </div>
 		</nav> 
-	
+
 		<div class="body-content-1">
+	
+			<p><b>Edit Job</b></p>
 
-			<p style="font-size: 20px"><b>Login Employer</b></p>
+			<form action="/edit_job" method="POST">
+				<input type="hidden" name="job_id" 	value="{{job_id}}">
+				<input type="string" name="job_name" value="{{job_name}}" placeholder="Job name"><br>
+				<input type="string" name="company_name" value="{{company_name}}" placeholder="Company name"><br>
+				<input type="number" name="salary" 	value="{{salary}}" placeholder="Salary"><br>
+				<input type="string" name="description" value="{{description}}"	placeholder="Description"><br>
+				<input type="string" name="website_link" value="{{website_link}}" placeholder="Website link"><br>
+			
+				<button class="btn btn-outline-dark" type="submit">Submit</button>
 
-			<form action="/employer_login" method="POST">
-				<input type="string" name="email" placeholder="email"><br>
-				<input type="password" name="password" placeholder="password"><br>
-				<button class="btn btn-info" type="submit">Submit</button>
 			</form>
-
-			<p><a href="/create_employer">Create an account</a></p>
 
 		</div>
 

@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 import bcrypt
 
-engine = create_engine(os.environ["DATABASE_URL"])
+engine = create_engine(os.environ["DATABASE_URL"], echo=True)
 
 meta = MetaData()
 Base = declarative_base()
@@ -22,6 +22,7 @@ class Job(Base):
 	salary = Column(Float)
 	description = Column(String)
 	website_link = Column(String)
+	creator_id = Column(Integer)
 
 	def __repr__(self):
 		return "<Job(job_name='%s', company_name='%s', salary='%s', description='%s', website_link='%s')>" \

@@ -2,3 +2,5 @@ sqlalchemy
 werkzeug
 flask
 bcrypt
+flask_login
+cryptography

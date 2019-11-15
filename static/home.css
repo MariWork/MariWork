@@ -1,0 +1,26 @@
+#body{
+	margin: 0;
+	padding: 0;
+}
+
+#home-section-1{
+	min-height:100vh;
+	background-color: grey;
+	/*background-image: url("img/background-2.jpeg");*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url("img/background-3.jpeg");
+	/*background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("img/background-1.jpeg");*/
+}
+
+#home-section-1-text-1{
+	text-align: center;
+	padding-top: 40vh;
+	padding-bottom: 40vh;
+	color: black;
+}
+
+#home-section-2{
+	padding-top: 20vh;
+	text-align: center;
+}

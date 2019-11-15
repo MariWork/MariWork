@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -11,7 +11,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
 
 	<title>MariWork</title>
 	</head>
@@ -39,19 +39,18 @@
 			    </ul>
 			  </div>
 		</nav> 
-	
-		<div class="body-content-1">
 
-			<p style="font-size: 20px"><b>Login Employer</b></p>
+		<div id="home-section-1">
+			<div id="home-section-1-text-1">
+				<p style="font-size: 20px"><b>Welcome to MariWork</b></p>
+				<p>Jobs for Marianopolis Students</p>
+				<a class="btn btn-outline-dark" href="/view_jobs">View Jobs</a> <a class="btn btn-outline-dark" href="/view_created_jobs">Create jobs</a>
+			</div>
+		</div>
 
-			<form action="/employer_login" method="POST">
-				<input type="string" name="email" placeholder="email"><br>
-				<input type="password" name="password" placeholder="password"><br>
-				<button class="btn btn-info" type="submit">Submit</button>
-			</form>
-
-			<p><a href="/create_employer">Create an account</a></p>
-
+		<div id="home-section-2" class="body-content-1">
+			<center><p style="font-size: 20px"><b>About MariWork</b></p></center>
+			<p>MariWork is a job platform that connects Marianopolis College students to unique job experiences.</p>
 		</div>
 
 	</body>
