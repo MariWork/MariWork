@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -11,7 +11,6 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
 
 	<title>MariWork</title>
 	</head>
@@ -33,25 +32,26 @@
 			      <li class="nav-item">
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </li>
-			      <li class="nav-item">
+  			      <li class="nav-item">
 			        <a class="nav-link" href="/contact">Contact</a>
 			      </li>
 			    </ul>
 			  </div>
 		</nav> 
-	
+
 		<div class="body-content-1">
-
-			<p style="font-size: 20px"><b>Login Employer</b></p>
-
-			<form action="/employer_login" method="POST">
-				<input type="string" name="email" placeholder="email"><br>
-				<input type="password" name="password" placeholder="password"><br>
-				<button class="btn btn-info" type="submit">Submit</button>
-			</form>
-
-			<p><a href="/create_employer">Create an account</a></p>
-
+			<center><p style="font-size: 20px"><b>Contact</b></p></center><br><br>
+			<p><b>Laurence Liang</b></p>
+			<br>
+			<div style="min-width: 50%; max-width: 60%">
+				<p>MariWork Web Developer</p>
+				<p>Hey! I'm the person currently developing and maintaining the MariWork website. If you have any questions or are experiencing any difficulties, please feel free to contact me!</p>
+				<p>Email: laurence.w.liang@gmail.com<br>
+				Phone: (514) 971-4848<br>
+				LinkedIn: Laurence Liang<br>
+				Facebook: Laurence Liang<br>
+				</p>
+			</div>
 		</div>
 
 	</body>
