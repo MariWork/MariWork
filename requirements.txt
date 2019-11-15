@@ -10,3 +10,4 @@ werkzeug
 bcrypt
 flask_login
 cryptography
+psycopg2
