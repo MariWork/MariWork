@@ -1,3 +1,4 @@
 priv/__pycache__
 src/__pychache__
 vix.exe.stackdump
+templates/test_jquery.html
