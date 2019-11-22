@@ -1,7 +1,7 @@
 import os
 
 from priv.create_tables import Job, Employer
-from src.database_functions import *
+from src.database_functions import check_if_https_in_url, get_id_from_email, return_value_if_none
 
 import bcrypt
 
@@ -135,14 +135,15 @@ def view_created_jobs():
 @flask_login.login_required
 def edit_job():
 	if request.method == "POST":
-		job_id = int(request.form["job_id"])
+		job_id = int(request.form["job_id"],0)
 
 		job = session.query(Job).filter_by(id=job_id).first()
-		job.name = request.form["job_name"]
+		job.job_name = request.form["job_name"]
 		job.company_name = request.form["company_name"]
-		job.salary = float(request.form["salary"])
+		print("salary: "+str(request.form["salary"]))
+		salary = return_value_if_none(request.form["salary"])
 		job.description = request.form["description"]
-		job.website_link = request.form["website_link"]
+		job.website_link = get_id_from_email(request.form["website_link"])
 
 		session.commit()
 
@@ -186,7 +187,7 @@ def create_employer():
 		email = request.form["email"]
 		password = request.form["password"]
 		description = request.form["description"]
-		link = request.form["link"]
+		link = check_if_https_in_url(request.form["link"])
 		company_name = request.form["company_name"]
 
 		print(password)
@@ -213,9 +214,9 @@ def create_job():
 
 		job_name = request.form["job_name"]
 		company_name = request.form["company_name"]
-		salary = request.form["salary"]
+		salary = float(return_value_if_none(request.form["salary"],0))
 		description = request.form["description"]
-		website_link = request.form["website_link"]
+		website_link = check_if_https_in_url(request.form["website_link"])
 		creator_id = get_id_from_email(session, Employer, flask_login.current_user.id)
 
 		new_job = Job(job_name=job_name, 
