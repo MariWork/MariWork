@@ -141,7 +141,7 @@ def edit_job():
 		job.job_name = request.form["job_name"]
 		job.company_name = request.form["company_name"]
 		print("salary: "+str(request.form["salary"]))
-		salary = return_value_if_none(request.form["salary"])
+		salary = float(request.form["salary"])
 		job.description = request.form["description"]
 		job.website_link = get_id_from_email(request.form["website_link"])
 
@@ -214,7 +214,7 @@ def create_job():
 
 		job_name = request.form["job_name"]
 		company_name = request.form["company_name"]
-		salary = float(return_value_if_none(request.form["salary"],0))
+		salary = float(request.form["salary"])
 		description = request.form["description"]
 		website_link = check_if_https_in_url(request.form["website_link"])
 		creator_id = get_id_from_email(session, Employer, flask_login.current_user.id)
