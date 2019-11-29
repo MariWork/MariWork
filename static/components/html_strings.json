@@ -1,0 +1,4 @@
+{
+	"logout":"<a class=\"nav-link\" href=\"/logout\">Logout</a>",
+	"login": "<a class=\"nav-link\" href=\"/employer_login\">Login</a>"
+}

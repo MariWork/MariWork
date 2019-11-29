@@ -1,4 +1,5 @@
 import os
+import json
 
 from priv.create_tables import Job, Employer
 from src.database_functions import check_if_https_in_url, get_id_from_email, return_value_if_none
@@ -16,6 +17,9 @@ from cryptography.fernet import Fernet
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
+
+with open("static/components/html_strings.json", 'r') as jsonfile:
+	html_components_dict = json.load(jsonfile)
 
 engine = create_engine(os.environ["DATABASE_URL"], echo = True)
 
@@ -35,7 +39,12 @@ for employer in session.query(Employer):
 
 
 class User(flask_login.UserMixin):
-	pass
+	
+	def __init__(self):
+		self.is_authenticated_local = False
+
+	def set_is_authenticated(self, value):
+		self.is_authenticated_local = value
 
 @login_manager.user_loader
 def user_loader(email):
@@ -55,30 +64,42 @@ def request_loader(request):
 	user = User()
 	user.id = email
 
-	user.is_authenticated = bcrypt.checkpw(request.form['password'], users[email]['password_+hash'])
+	password = request.form["password"]
+
+	if bcrypt.checkpw(password.encode(), \
+			session.query(Employer).filter_by(email=email).first().password_hash.encode()):
+		user.set_is_authenticated(True)
+
+	else:
+		user.set_is_authenticated(False)
 
 	return user
 
-# conn = engine.connect()
-
 @app.route('/')
 def home():
+	login_dict_key = "login"
 
-	return render_template("home.html")
+	if flask_login.current_user.is_authenticated:
+		login_dict_key = "logout"
+
+	return render_template("home.html", login_placeholder=html_components_dict[login_dict_key])
 
 
 @app.route('/view_jobs')
 def view_jobs():
+	login_dict_key = "login"
 
+	if flask_login.current_user.is_authenticated:
+		login_dict_key = "logout"
 	all_jobs = []
 
 	for job in session.query(Job):
 		print(job)
-		job_button = "<a href=\""+job.website_link+"\" class=\"btn btn-success\">View</a>"
+		job_button = "<a target=\"_blank\" href=\""+job.website_link+"\" class=\"btn btn-success\">View</a>"
 		temp_list = [job.job_name, job.company_name, job_button]
 		all_jobs.append(temp_list)
 
-	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs))
+	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs), login_placeholder=html_components_dict[login_dict_key])
 
 @app.route("/protected")
 @flask_login.login_required
@@ -87,11 +108,18 @@ def protected():
 
 @app.route('/employer_login', methods=["GET", "POST"])
 def employer_login():
+	login_dict_key = "login"
+
+	if flask_login.current_user.is_authenticated:
+		login_dict_key = "logout"
 
 	if request.method == "POST":
 
 		email = request.form["email"]
 		password = request.form["password"]
+
+		print(email)
+		print(password)
 
 		list_of_results = []
 
@@ -104,9 +132,9 @@ def employer_login():
 
 			return flask.redirect(flask.url_for("view_created_jobs"))
 
-		return render_template("login_employer.html")
+		return render_template("login_employer.html", login_placeholder=html_components_dict[login_dict_key])
 
-	return render_template("login_employer.html")
+	return render_template("login_employer.html", login_placeholder=html_components_dict[login_dict_key])
 
 @app.route('/logout')
 def logout():
@@ -235,7 +263,12 @@ def create_job():
 
 @app.route("/contact")
 def contact():
-	return render_template("contact.html")
+	login_dict_key = "login"
+
+	if flask_login.current_user.is_authenticated:
+		login_dict_key = "logout"
+
+	return render_template("contact.html", login_placeholder=html_components_dict[login_dict_key])
 
 if __name__ == '__main__':
 	print("Employers")
