@@ -4,6 +4,20 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+		<meta property="og:title" content="MariWork">
+		<meta property="og:description" content="Jobs for Marianopolis Students, made by MSU Congress">
+		<meta property="og:image" content="{{ url_for('static', filename='img/display_logo.png') }}">
+		<meta property="og:url" content="mariwork.herokuapp.com/view_jobs">
+		<meta property="og:site_name" content="MariWork">
+
+
+		<meta name="twitter:title" content="MariWork">
+		<meta name="twitter:description" content="Jobs for Marianopolis Students, made by MSU Congress">
+		<meta name="twitter:image" content="{{ url_for('static', filename='img/display_logo.png') }}">		
+		<meta name="twitter:image:alt" content="MariWork">
+		<meta name="twitter:card" content="MariWork">
+
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -30,7 +44,7 @@
 			        <a class="nav-link" href="/view_created_jobs">View My Jobs</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/logout">Logout</a>
+			        {{login_placeholder|safe}}
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="/contact">Contact</a>
