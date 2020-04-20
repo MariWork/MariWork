@@ -96,7 +96,7 @@ def view_jobs():
 	for job in session.query(Job):
 		print(job)
 		job_button = "<a target=\"_blank\" href=\""+job.website_link+"\" class=\"btn btn-success\">View</a>"
-		temp_list = [job.job_name, job.company_name, job_button]
+		temp_list = [job.job_name, job.company_name, job.description, job_button]
 		all_jobs.append(temp_list)
 
 	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs), login_placeholder=html_components_dict[login_dict_key])
@@ -171,7 +171,7 @@ def edit_job():
 		print("salary: "+str(request.form["salary"]))
 		salary = float(request.form["salary"])
 		job.description = request.form["description"]
-		job.website_link = get_id_from_email(request.form["website_link"])
+		job.website_link = request.form["website_link"]
 
 		session.commit()
 
@@ -273,5 +273,5 @@ def contact():
 if __name__ == '__main__':
 	print("Employers")
 	for employer in session.query(Employer):
-			print(employer.first_name, employer.email, employer.password_hash)
+			print(employer.first_name, employer.email)
 	app.run(debug=True)
