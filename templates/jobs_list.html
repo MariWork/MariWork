@@ -55,7 +55,36 @@
 
 		<div class="body-content-1">
 
-			<p><b>Available Jobs</b></p>
+			<p><b>Job and Volunteering Resources</b></p>
+
+			<button class="accordion">+ YES Montreal</button>
+			<div class="panel">
+			  <p>Youth Employment Services Montreal is a nonprofit aimed to connect students with employment opportunities.</p>
+			  <p>Website: <a href="https://www.yesmontreal.ca">https://www.yesmontreal.ca</a>
+			  	<br>Contact: Analise Iten (annalise.iten@gmail.com)</p>
+			</div>
+
+
+			<button class="accordion">+ Office of MP Marc Garneau</button>
+			<div class="panel">
+			  <p>The Office of MP Marc Garneau oversees the federal operations in the NDG-Westmount riding, where Marianopolis College is located.</p>
+			  <p>The Office can answer student questions concerning the Summer Jobs Canada Program, ways to get involved with local organizations, and any questions concerning federal responsibilities.</p>
+			  <p>Website: <a href="https://marcgarneau.liberal.ca/en/">https://marcgarneau.liberal.ca/en/</a>
+			  	<br>Phone: (514) 283-2013
+			  	<br>Email: marc.garneau@parl.gc.ca
+			</div>
+
+
+			<button class="accordion">+ Volunteer Canada</button>
+			<div class="panel">
+			  <p>Volunteer Canada connects volunteers with organizations and communities to facilitate engagement, leadership and expertise.</p>
+			  <p>Website: <a href="https://volunteer.ca">https://volunteer.ca</a>
+			  <br>Contact: Alison Stevens (astevens@volunteer.ca)</p>
+			</div>
+			<br><br>
+
+
+			<p><b>Available Jobs and Volunteering Opportunities</b></p>
 
 
 			<div id='table'>		
@@ -66,12 +95,27 @@
 				var data = {{list_of_all_jobs|safe}};
 
 				var content = "<table class=\"table table-bordered\">";
-				content += "<tr><th>Job</th><th>Employer</th><th>Website</th></tr>";
+				content += "<tr><th>Title</th><th>Organization</th><th>Description</th><th>Link</th></tr>";
 				for(i=0; i<data.length; i++){
-				    content += '<tr><td>' + data[i][0] + ' </td><td>' +  data[i][1] + '</td><td>' + data[i][2] + '</td></tr>';
+				    content += '<tr><td>' + data[i][0] + ' </td><td>' +  data[i][1] + '</td><td>' + data[i][2] + '</td><td>' + data[i][3] + '</td></tr>';
 				}
 				content += "</table>";
 				$('#table').append(content);
+
+				var acc = document.getElementsByClassName("accordion");
+				var i;
+
+				for (i = 0; i < acc.length; i++) {
+				  acc[i].addEventListener("click", function() {
+				    this.classList.toggle("active");
+				    var panel = this.nextElementSibling;
+				    if (panel.style.maxHeight) {
+				      panel.style.maxHeight = null;
+				    } else {
+				      panel.style.maxHeight = panel.scrollHeight + "px";
+				    } 
+				  });
+				}
 
 			</script>
 
