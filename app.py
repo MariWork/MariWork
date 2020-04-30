@@ -92,14 +92,22 @@ def view_jobs():
 	if flask_login.current_user.is_authenticated:
 		login_dict_key = "logout"
 	all_jobs = []
+	all_volunteering = []
 
-	for job in session.query(Job):
+	for job in session.query(Job).order_by(Job.tags.asc()):
 		print(job)
 		job_button = "<a target=\"_blank\" href=\""+job.website_link+"\" class=\"btn btn-success\">View</a>"
-		temp_list = [job.job_name, job.company_name, job.description, job_button]
-		all_jobs.append(temp_list)
+		job_name = job.job_name	
+		if job.tags is not None:
+			for tag in job.tags:
+				job_name += f' <span class="badge badge-warning">{tag}</span>'
+		temp_list = [job_name, job.company_name, job.description, job_button]
+		if "paid-employment" in job.categories: 
+			all_jobs.append(temp_list)
+		else:
+			all_volunteering.append(temp_list)
 
-	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs), login_placeholder=html_components_dict[login_dict_key])
+	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs), list_of_all_volunteering=str(all_volunteering), login_placeholder=html_components_dict[login_dict_key])
 
 @app.route("/protected")
 @flask_login.login_required
@@ -273,5 +281,9 @@ def contact():
 if __name__ == '__main__':
 	print("Employers")
 	for employer in session.query(Employer):
-			print(employer.first_name, employer.email)
+			print(employer.first_name, employer.email, employer.password_hash)
+	employer = session.query(Employer).filter_by(email="laurencel2001@gmail.com").first()
+	employer.set_password("password")
+	session.add(employer)
+	session.commit()
 	app.run(debug=True)

@@ -84,23 +84,37 @@
 			<br><br>
 
 
-			<p><b>Available Jobs and Volunteering Opportunities</b></p>
+			<p><b>Available Jobs</b></p>
+			<div id='jobs-table'>		
+			</div>
 
+			<p><b>Available Volunteering Opportunities</b></p>
+			<div id='volunteering-table'>	
+			</div>	
 
-			<div id='table'>		
 
 			</div>
 				
 			<script type="text/javascript">
-				var data = {{list_of_all_jobs|safe}};
+				var jobsData = {{list_of_all_jobs|safe}};
 
-				var content = "<table class=\"table table-bordered\">";
-				content += "<tr><th>Title</th><th>Organization</th><th>Description</th><th>Link</th></tr>";
-				for(i=0; i<data.length; i++){
-				    content += '<tr><td>' + data[i][0] + ' </td><td>' +  data[i][1] + '</td><td>' + data[i][2] + '</td><td>' + data[i][3] + '</td></tr>';
+				var jobsContent = "<table class=\"table table-bordered\">";
+				jobsContent += "<tr><th>Title</th><th>Organization</th><th>Description</th><th>Link</th></tr>";
+				for(i=0; i<jobsData.length; i++){
+				    jobsContent += '<tr><td>' + jobsData[i][0] + ' </td><td>' +  jobsData[i][1] + '</td><td>' + jobsData[i][2] + '</td><td>' + jobsData[i][3] + '</td></tr>';
 				}
-				content += "</table>";
-				$('#table').append(content);
+				jobsContent += "</table>";
+				$('#jobs-table').append(jobsContent);
+
+				var volunteeringData = {{list_of_all_volunteering|safe}};
+
+				var volunteeringContent = "<table class=\"table table-bordered\">";
+				volunteeringContent += "<tr><th>Title</th><th>Organization</th><th>Description</th><th>Link</th></tr>";
+				for(i=0; i<volunteeringData.length; i++){
+				    volunteeringContent += '<tr><td>' + volunteeringData[i][0] + ' </td><td>' +  volunteeringData[i][1] + '</td><td>' + volunteeringData[i][2] + '</td><td>' + volunteeringData[i][3] + '</td></tr>';
+				}
+				volunteeringContent += "</table>";
+				$('#volunteering-table').append(volunteeringContent);
 
 				var acc = document.getElementsByClassName("accordion");
 				var i;
