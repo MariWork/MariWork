@@ -14,7 +14,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from cryptography.fernet import Fernet
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, func
 from sqlalchemy.orm import sessionmaker
 
 
@@ -67,7 +67,7 @@ def request_loader(request):
 	password = request.form["password"]
 
 	if bcrypt.checkpw(password.encode(), \
-			session.query(Employer).filter_by(email=email).first().password_hash.encode()):
+			session.query(Employer).filter(func.lower(Employer.email)==func.lower(email)).first().password_hash.encode()):
 		user.set_is_authenticated(True)
 
 	else:
@@ -102,10 +102,12 @@ def view_jobs():
 			for tag in job.tags:
 				job_name += f' <span class="badge badge-warning">{tag}</span>'
 		temp_list = [job_name, job.company_name, job.description, job_button]
-		if "paid-employment" in job.categories: 
-			all_jobs.append(temp_list)
-		else:
+		if job.categories is not None:
+			if "paid-employment" in job.categories: 
+				all_jobs.append(temp_list)
+		if job.categories is None or "volunteering" in job.categories:
 			all_volunteering.append(temp_list)
+			print("volunteer!")
 
 	return render_template("jobs_list.html", list_of_all_jobs=str(all_jobs), list_of_all_volunteering=str(all_volunteering), login_placeholder=html_components_dict[login_dict_key])
 
@@ -132,7 +134,7 @@ def employer_login():
 		list_of_results = []
 
 		if bcrypt.checkpw(password.encode(), \
-			session.query(Employer).filter_by(email=email).first().password_hash.encode()):
+			session.query(Employer).filter(func.lower(Employer.email)==func.lower(email)).first().password_hash.encode()):
 
 			user = User()
 			user.id = email
