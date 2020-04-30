@@ -2,3 +2,5 @@
 .env
 vix.exe.stackdump
 templates/test_jquery.html
+vim.exe.stackdump
+alembic.ini
