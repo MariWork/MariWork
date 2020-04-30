@@ -11,3 +11,4 @@ bcrypt
 flask_login
 cryptography
 psycopg2
+alembic

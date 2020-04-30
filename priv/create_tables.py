@@ -1,6 +1,7 @@
 
 from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime
 from sqlalchemy	import create_engine
+from sqlalchemy.types import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
@@ -23,6 +24,8 @@ class Job(Base):
 	description = Column(String)
 	website_link = Column(String)
 	creator_id = Column(Integer)
+	categories = Column(ARRAY(String))
+	tags = Column(ARRAY(String))
 
 	def __repr__(self):
 		return "<Job(job_name='%s', company_name='%s', salary='%s', description='%s', website_link='%s')>" \
