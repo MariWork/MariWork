@@ -102,9 +102,11 @@ def view_jobs():
 			for tag in job.tags:
 				job_name += f' <span class="badge badge-warning">{tag}</span>'
 		temp_list = [job_name, job.company_name, job.description, job_button]
+
 		if job.categories is not None:
 			if "paid-employment" in job.categories: 
 				all_jobs.append(temp_list)
+
 		if job.categories is None or "volunteering" in job.categories:
 			all_volunteering.append(temp_list)
 			print("volunteer!")
